@@ -51,10 +51,10 @@ const vietnamData = async () => {
     arr = [].concat.apply([], arr).filter(el => Object.keys(el).length != 0).sort((a, b) => b.id - a.id);
     arr = [...new Map(arr.map(item => [item.id, item])).values()];
     await set('ncov', arr);
+    log.info(`NCOV-ALL SUCCESS! ${arr.length} cases`);
     // reset cho lần loop sau
     arr = [];
     i = 0;
-    log.info(`NCOV-ALL SUCCESS! ${arr.length} cases`);
 };
 
 module.exports = vietnamData;
