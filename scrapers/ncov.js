@@ -48,7 +48,7 @@ const vietnamData = async () => {
             return null;
         }
     }
-    arr = [].concat.apply([], arr).filter(el => Object.keys(el).length != 0).sort((a, b) => b.id - a.id);
+    arr = [].concat.apply([], arr).filter(el => el.id).sort((a, b) => b.id - a.id);
     arr = [...new Map(arr.map(item => [item.id, item])).values()];
     await set('ncov', arr);
     log.info(`NCOV-ALL SUCCESS! ${arr.length} cases`);
