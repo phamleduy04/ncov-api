@@ -1,5 +1,6 @@
+require('dotenv').config();
 const { Database } = require('quickmongo');
-const db = new Database(process.env.MONGODB || 'mongodb://localhost/hackku');
+const db = new Database(process.env.MONGODB || 'mongodb://localhost/ncov-api');
 
 db.on('ready', () => console.log('Database is ready!'));
 

@@ -5,7 +5,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const womRouter = require('./routes/wom');
 const ncovRouter = require('./routes/ncov');
-require('dotenv').config();
+const historicalRouter = require('./routes/historical');
 const app = express();
 
 // view engine setup
@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/', indexRouter);
 app.use('/wom', womRouter);
 app.use('/ncov', ncovRouter);
+app.use('/historical', historicalRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
