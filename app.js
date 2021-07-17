@@ -19,9 +19,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
+app.use(express.static(require('path').join(__dirname, 'public')));
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJSON, {
   explorer: false,
   customSiteTitle: 'NCOVVN API Documention',
+  customCssUrl: "/css/apidocs.css",
 }));
 app.use('/wom', womRouter);
 app.use('/ncov', ncovRouter);
