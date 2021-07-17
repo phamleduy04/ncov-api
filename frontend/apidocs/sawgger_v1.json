@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "NCOVVN API",
-    "description": "API cung cấp thông tin về ncov!",
+    "description": "API cung cấp thông tin về COVID-19!",
     "license": {
       "name": "GNU V3",
       "url": "https://www.gnu.org/licenses/gpl-3.0.en.html"

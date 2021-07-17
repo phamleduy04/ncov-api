@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/', indexRouter);
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJSON, {
   explorer: false,
-  customSiteTitle: 'ncovvn docs',
+  customSiteTitle: 'NCOVVN API Documention',
 }));
 app.use('/wom', womRouter);
 app.use('/ncov', ncovRouter);
