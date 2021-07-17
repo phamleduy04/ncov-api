@@ -3,12 +3,6 @@ on:
   push:
     branches: 
       - '*'
-    paths-ignore:
-    - '.github/**'
-    - '*.md'
-    - 'assets/**'
-    - 'LICENSE'
-    - 'node_modules/*'
   pull_request:
     branches: 
       - '*'
