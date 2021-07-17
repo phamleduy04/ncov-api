@@ -1,4 +1,5 @@
 module.exports = {
+	"ignorePatterns": ["node_modules/*"],
     "env": {
         "es2020": true,
         "commonjs": true,
