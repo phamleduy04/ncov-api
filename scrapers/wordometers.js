@@ -1,6 +1,6 @@
 /**
  * Database ID: ncov
- * Interval: 30m
+ * Interval: 10m
  */
 
 const columns = ['index', 'country', 'cases', 'todayCases', 'deaths', 'todayDeaths', 'recovered', 'todayRecovered', 'active', 'critical'];

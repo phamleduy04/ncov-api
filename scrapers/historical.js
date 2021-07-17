@@ -1,6 +1,6 @@
 /**
  * DatabaseID: historical
- * Interval: 30m
+ * Interval: 10m
  */
 const axios = require('axios');
 const csv2json = require('csvtojson');

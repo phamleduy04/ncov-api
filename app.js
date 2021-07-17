@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
+const swaggerUI = require('swagger-ui-express');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
@@ -7,16 +8,21 @@ const womRouter = require('./routes/wom');
 const ncovRouter = require('./routes/ncov');
 const historicalRouter = require('./routes/historical');
 const app = express();
+const swaggerJSON = require('./frontend/apidocs/sawgger_v1.json');
 
 // view engine setup
 app.set('views', require('path').join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
+app.use(require('cors')({ allowedHeaders: '*' }));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJSON, {
+  explorer: false,
+  customSiteTitle: 'ncovvn docs',
+}));
 app.use('/wom', womRouter);
 app.use('/ncov', ncovRouter);
 app.use('/historical', historicalRouter);
@@ -44,6 +50,6 @@ executeSmallScraper();
 executeBigScraper();
 
 setInterval(executeBigScraper, ms('5h'));
-setInterval(executeSmallScraper, ms('30m'));
+setInterval(executeSmallScraper, ms('10m'));
 
 module.exports = app;
