@@ -17,7 +17,6 @@ const wordsStandardize = (word) => word ? word.trim().toLowerCase().normalize('N
 		iso3: countryFound.iso3,
 		lat: countryFound.lat,
 		long: countryFound.long,
-		woh: countryFound.woh,
 	} : nullReturn;
 };
 
