@@ -46,8 +46,10 @@ app.use((err, req, res, next) => {
 const ms = require('ms');
 const { executeBigScraper, executeSmallScraper } = require('./handlers/instances');
 
-executeSmallScraper();
-executeBigScraper();
+if (process.env.NODE_ENV != 'dev') {
+  executeSmallScraper();
+  executeBigScraper();
+};
 
 setInterval(executeBigScraper, ms('5h'));
 setInterval(executeSmallScraper, ms('10m'));
