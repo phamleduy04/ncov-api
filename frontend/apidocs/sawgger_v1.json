@@ -28,6 +28,14 @@
     {
       "name": "Worldometers",
       "description": "Dữ liệu COVID-19 lấy từ Worldometers, được cập nhật 10 phút một lần"
+    },
+    {
+      "name": "ncov",
+      "description": "Dữ liệu bệnh nhân lấy từ trang chủ của Bộ Y Tế Việt Nam, được cập nhật 5 tiếng một lần"
+    },
+    {
+      "name": "Lịch Sử",
+      "description": "Lịch sử dữ liệu COVID-19 của Việt Nam lấy từ Vnexpress, được cập nhật 10 phút một lần"
     }
   ],
   "paths": {
@@ -204,6 +212,75 @@
           }
         }
       }
+    },
+    "/ncov": {
+      "get": {
+        "tags": [
+          "ncov"
+        ],
+        "summary": "Tất cả dữ liệu của bệnh nhân tại Việt Nam",
+        "responses": {
+          "200": {
+            "description": "Đã lấy dữ liệu thành công",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ncovAll"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ncov/{id}": {
+      "get": {
+        "tags": [
+          "ncov"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Số thứ tự của bệnh nhân",
+            "type": "number"
+          }
+        ],
+        "summary": "Lấy dữ liệu của bệnh nhân được chỉ định tại Việt Nam",
+        "responses": {
+          "200": {
+            "description": "Đã lấy dữ liệu thành công",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ncov"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/historical": {
+      "get": {
+        "tags": [
+          "Lịch Sử"
+        ],
+        "summary": "Tất cả lịch sử dữ liệu COVID-19 của Việt Nam",
+        "responses": {
+          "200": {
+            "description": "Đã lấy dữ liệu thành công",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/historicalVNArr"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -352,6 +429,176 @@
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/covidState"
+        }
+      },
+      "ncov": {
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tuoi": {
+            "type": "number"
+          },
+          "dia_diem": {
+            "type": "string"
+          },
+          "tinh_trang": {
+            "type": "string"
+          },
+          "quoc_tich": {
+            "type": "string"
+          }
+        }
+      },
+      "ncovAll": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ncov"
+        }
+      },
+      "historicalVN": {
+        "properties": {
+          "ngay": {
+            "type": "string"
+          },
+          "cong_dong": {
+            "type": "number"
+          },
+          "tong_cong_dong": {
+            "type": "number"
+          },
+          "blockade": {
+            "type": "number"
+          },
+          "community": {
+            "type": "number"
+          },
+          "imported": {
+            "type": "number"
+          },
+          "new_deaths": {
+            "type": "number"
+          },
+          "new_recovered": {
+            "type": "number"
+          },
+          "new_cases": {
+            "type": "number"
+          },
+          "total_cases": {
+            "type": "number"
+          },
+          "total_deaths": {
+            "type": "number"
+          },
+          "total_recovered": {
+            "type": "number"
+          },
+          "quy_vaccine": {
+            "type": "number"
+          },
+          "quy_vaccine_hom_nay": {
+            "type": "number"
+          },
+          "mien_bac": {
+            "type": "number"
+          },
+          "mien_trung": {
+            "type": "number"
+          },
+          "mien_nam": {
+            "type": "number"
+          },
+          "tong_mien_bac": {
+            "type": "number"
+          },
+          "tong_mien_trung": {
+            "type": "number"
+          },
+          "tong_mien_nam": {
+            "type": "number"
+          },
+          "new_active": {
+            "type": "number"
+          },
+          "total_active": {
+            "type": "number"
+          },
+          "total_cases_2020": {
+            "type": "number"
+          },
+          "total_deaths_2020": {
+            "type": "number"
+          },
+          "total_recovered_2020": {
+            "type": "number"
+          },
+          "deaths_per_cases": {
+            "type": "string"
+          },
+          "deaths_1m_pop": {
+            "type": "number"
+          },
+          "cases_1m_pop": {
+            "type": "number"
+          },
+          "ma7_local_cases": {
+            "type": "number"
+          },
+          "ma7_recovered": {
+            "type": "number"
+          },
+          "ma7_deaths": {
+            "type": "number"
+          },
+          "city_by_day": {
+            "type": "number"
+          },
+          "mt7_local_cases": {
+            "type": "number"
+          },
+          "mt7_recovered": {
+            "type": "number"
+          },
+          "mt7_deaths": {
+            "type": "number"
+          },
+          "diff_mt7_local_cases": {
+            "type": "number"
+          },
+          "diff_mt7_recovered": {
+            "type": "number"
+          },
+          "diff_mt7_deaths": {
+            "type": "number"
+          },
+          "per_mt7_local_cases": {
+            "type": "string"
+          },
+          "per_mt7_recovered": {
+            "type": "string"
+          },
+          "per_mt7_deaths": {
+            "type": "string"
+          },
+          "vaccine_doses": {
+            "type": "number"
+          },
+          "vaccine_dose_per_pop": {
+            "type": "string"
+          },
+          "total_cities": {
+            "type": "number"
+          },
+          "day_full": {
+            "type": "string"
+          }
+        }
+      },
+      "historicalVNArr": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/historicalVN"
         }
       }
     }
