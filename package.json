@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "scraper": "node serverScrapers.js",
-    "lint": "eslint **/**.js"
+    "lint": "eslint ."
   },
   "dependencies": {
     "axios": "^0.21.1",
