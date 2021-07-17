@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "scraper": "node serverScrapers.js"
+    "scraper": "node serverScrapers.js",
+    "lint": "eslint **/**.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
