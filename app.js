@@ -24,6 +24,7 @@ app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJSON, {
   explorer: false,
   customSiteTitle: 'NCOVVN API Documention',
   customCssUrl: "/css/apidocs.css",
+  customfavIcon: "/img/favicon.png",
 }));
 app.use('/wom', womRouter);
 app.use('/ncov', ncovRouter);
