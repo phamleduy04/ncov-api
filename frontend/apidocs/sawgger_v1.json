@@ -36,6 +36,10 @@
     {
       "name": "Lịch Sử",
       "description": "Lịch sử dữ liệu COVID-19 của Việt Nam lấy từ Vnexpress, được cập nhật 10 phút một lần"
+    },
+    {
+      "name": "Thành Phố VN",
+      "description": "Dữ liệu COVID-19 theo thành phố ở Việt Nam, được cập nhật 2 tiếng một lần!"
     }
   ],
   "paths": {
@@ -275,6 +279,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/historicalVNArr"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cityvn": {
+      "get": {
+        "tags": [
+          "Thành Phố VN"
+        ],
+        "summary": "Tất cả dữ liệu COVID-19 xếp theo Thành Phố",
+        "responses": {
+          "200": {
+            "description": "Đã lấy dữ liệu thành công",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cityvnArr"
                 }
               }
             }
@@ -599,6 +623,34 @@
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/historicalVN"
+        }
+      },
+      "cityvn": {
+        "properties": {
+          "updatedAt": {
+            "type": "number"
+          },
+          "dia_diem": {
+            "type": "string"
+          },
+          "tong_ca_nhiem": {
+            "type": "number"
+          },
+          "dang_dieu_tri": {
+            "type": "number"
+          },
+          "khoi": {
+            "type": "number"
+          },
+          "tu_vong": {
+            "type": "number"
+          }
+        }
+      },
+      "cityvnArr": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/cityvn"
         }
       }
     }
