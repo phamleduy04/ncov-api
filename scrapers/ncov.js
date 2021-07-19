@@ -1,6 +1,6 @@
 /**
  * Database ID: ncov
- * Interval: 5h
+ * Interval: 2h
  */
 
 const axios = require('axios');
@@ -33,9 +33,9 @@ const mapRows = (_, row) => {
  */
 let arr = [];
 let i = 0;
-const vietnamData = async () => {
-    while (true) {
-        try {
+const getVietnam = async () => {
+    try {
+        while (true) {
             i++;
             const url = `https://ncov.moh.gov.vn/vi/web/guest/trang-chu?p_p_id=corona_trangchu_top_CoronaTrangchuTopPortlet_INSTANCE_RrVAbIFIPL7v&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_corona_trangchu_top_CoronaTrangchuTopPortlet_INSTANCE_RrVAbIFIPL7v_delta=500&_corona_trangchu_top_CoronaTrangchuTopPortlet_INSTANCE_RrVAbIFIPL7v_resetCur=false&_corona_trangchu_top_CoronaTrangchuTopPortlet_INSTANCE_RrVAbIFIPL7v_cur=${i}`;
             const html = cheerio.load((await axios.default({ method: 'GET', url, httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false }) })).data);
@@ -43,18 +43,21 @@ const vietnamData = async () => {
             await arr.push(res);
             await log.info(`Đã lấy xong trang ${i} với ${res.length} bệnh nhân`);
             if (res.filter(el => el.id == '1').length != 0 || i > 500) break;
-        } catch (err) {
-            log.err('NCOV-ALL failed!', err);
-            return null;
         }
+        arr = [].concat.apply([], arr).filter(el => el.id).sort((a, b) => b.id - a.id);
+        arr = [...new Map(arr.map(item => [item.id, item])).values()];
+        await set('ncov', arr);
+        log.info(`NCOV Scraper success! ${arr.length} cases`);
+        require('./cityVN')(arr);
+        log.info(`NCOV-ALL SUCCESS!`);
+        // reset cho lần loop sau
+        arr = [];
+        i = 0;
     }
-    arr = [].concat.apply([], arr).filter(el => el.id).sort((a, b) => b.id - a.id);
-    arr = [...new Map(arr.map(item => [item.id, item])).values()];
-    await set('ncov', arr);
-    log.info(`NCOV-ALL SUCCESS! ${arr.length} cases`);
-    // reset cho lần loop sau
-    arr = [];
-    i = 0;
+    catch (err) {
+        log.err('NCOV-ALL failed!', err);
+        return null;
+    }
 };
 
-module.exports = vietnamData;
+module.exports = getVietnam;

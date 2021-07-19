@@ -54,7 +54,7 @@ if (process.env.NODE_ENV != 'dev') {
   executeBigScraper();
 };
 
-setInterval(executeBigScraper, ms('5h'));
+setInterval(executeBigScraper, ms('2h'));
 setInterval(executeSmallScraper, ms('10m'));
 
 module.exports = app;
