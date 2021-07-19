@@ -2,11 +2,6 @@ const createError = require('http-errors');
 const express = require('express');
 const swaggerUI = require('swagger-ui-express');
 const logger = require('morgan');
-
-const indexRouter = require('./routes/index');
-const womRouter = require('./routes/wom');
-const ncovRouter = require('./routes/ncov');
-const historicalRouter = require('./routes/historical');
 const app = express();
 const swaggerJSON = require('./frontend/apidocs/sawgger_v1.json');
 
@@ -18,7 +13,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/', indexRouter);
+app.use('/', require('./routes/index'));
+
 app.use(express.static(require('path').join(__dirname, 'public')));
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJSON, {
   explorer: false,
@@ -26,9 +22,11 @@ app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJSON, {
   customCssUrl: "/css/apidocs.css",
   customfavIcon: "/img/favicon.png",
 }));
-app.use('/wom', womRouter);
-app.use('/ncov', ncovRouter);
-app.use('/historical', historicalRouter);
+
+app.use('/wom', require('./routes/wom'));
+app.use('/ncov', require('./routes/ncov'));
+app.use('/historical', require('./routes/historical'));
+app.use('/cityvn', require('./routes/cityVN'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
