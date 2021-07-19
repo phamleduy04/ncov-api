@@ -19,7 +19,7 @@ const processCityVN = async (ncovArr) => {
 
         const cityData = cityList.map((arr) => ({
             updatedAt: Date.now(),
-            dia_diem: arr[0].dia_diem,
+            dia_diem: arr[0].dia_diem || "Chưa Xác Định",
             tong_ca_nhiem: arr.length,
             dang_dieu_tri: arr.filter(el => el.tinh_trang === 'Đang điều trị').length,
             khoi: arr.filter(el => el.tinh_trang === 'Khỏi').length,
@@ -28,7 +28,7 @@ const processCityVN = async (ncovArr) => {
 
         await set('ncovcity', cityData);
         log.info(`NCOVcity SUCCESS! ${cityData.length} cities!`);
-    } catch(e) {
+    } catch(err) {
         log.err('NCOVcity failed!', err);
         return null;
     };

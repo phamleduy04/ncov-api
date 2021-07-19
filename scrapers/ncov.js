@@ -20,7 +20,7 @@ const mapRows = (_, row) => {
                 city[columns[index]] = cell.text() && cell.text() != '0' ? parseInt(cell.text()) : null;
                 break;
             default:
-				city[columns[index]] = cell.text();
+				city[columns[index]] = cell.text() && cell.text().length != 0 ? cell.text() : null;
 				break;
 		}
 	});
