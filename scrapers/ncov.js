@@ -4,7 +4,7 @@
  */
 
 const axios = require('axios');
-const cheerio = require('cheerio');
+const cheerio = require('cheerio').default;
 const log = require('../utils/log');
 const columns = ['id', 'tuoi', 'dia_diem', 'tinh_trang', 'quoc_tich'];
 const { set } = require('../handlers/database');

@@ -5,7 +5,7 @@
 
 const columns = ['index', 'country', 'cases', 'todayCases', 'deaths', 'todayDeaths', 'recovered', 'todayRecovered', 'active', 'critical'];
 const axios = require('axios');
-const cheerio = require('cheerio');
+const cheerio = require('cheerio').default;
 const log = require('../utils/log');
 const { set } = require('../handlers/database');
 const { getCountryData } = require('../utils/utils');
