@@ -39,7 +39,7 @@
     },
     {
       "name": "Thành Phố VN",
-      "description": "Dữ liệu COVID-19 theo thành phố ở Việt Nam, được cập nhật 2 tiếng một lần!"
+      "description": "Dữ liệu COVID-19 theo thành phố ở Việt Nam, được cập nhật 10 phút một lần!"
     }
   ],
   "paths": {
@@ -222,6 +222,7 @@
         "tags": [
           "ncov"
         ],
+        "deprecated": true,
         "summary": "Tất cả dữ liệu của bệnh nhân tại Việt Nam",
         "responses": {
           "200": {
@@ -242,6 +243,7 @@
         "tags": [
           "ncov"
         ],
+        "deprecated": true,
         "parameters": [
           {
             "name": "id",
@@ -636,10 +638,7 @@
           "tong_ca_nhiem": {
             "type": "number"
           },
-          "dang_dieu_tri": {
-            "type": "number"
-          },
-          "khoi": {
+          "hom_nay": {
             "type": "number"
           },
           "tu_vong": {

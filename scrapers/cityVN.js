@@ -3,35 +3,40 @@
  * Interval: 2h
  */
 
-const { set } = require('../handlers/database');
+const axios = require('axios');
+const cheerio = require('cheerio').default;
 const log = require('../utils/log');
+const columns = ['dia_diem', 'tong_ca_nhiem', 'hom_nay', 'tu_vong'];
+const { set } = require('../handlers/database');
+
+const mapRows = (_, row) => {
+	const city = { updatedAt: Date.now() };
+	cheerio(row).children('td').each((index, cell) => {
+		cell = cheerio.load(cell);
+		switch (index) {
+            case 0:
+                city[columns[index]] = cell.text();
+                break;
+            default:
+				city[columns[index]] = cell.text() && cell.text().length != 0 ? parseInt(cell.text().replace('.', '')) : null;
+				break;
+		}
+	});
+	return city;
+};
+
 const processCityVN = async (ncovArr) => {
     try {
-        const ref = {};
-        const cityList = ncovArr.reduce((arr, cityObject) => {
-            if (ref.hasOwnProperty(cityObject.dia_diem)) arr[ref[cityObject.dia_diem]].push(cityObject);
-            else {
-                ref[cityObject.dia_diem] = arr.length;
-                arr.push([cityObject]);
-            };
-            return arr;
-        }, []);
-
-        const cityData = cityList.map((arr) => ({
-            updatedAt: Date.now(),
-            dia_diem: arr[0].dia_diem || "Chưa Xác Định",
-            tong_ca_nhiem: arr.length,
-            dang_dieu_tri: arr.filter(el => el.tinh_trang === 'Đang điều trị').length,
-            khoi: arr.filter(el => el.tinh_trang === 'Khỏi').length,
-            tu_vong: arr.filter(el => el.tinh_trang === 'Tử vong').length,
-        }));
-
-        await set('ncovcity', cityData);
-        log.info(`NCOVcity SUCCESS! ${cityData.length} cities!`);
-    } catch(err) {
-        log.err('NCOVcity failed!', err);
+        const url = `https://ncov.moh.gov.vn/`;
+        const html = cheerio.load((await axios.default({ method: 'GET', url, httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false }) })).data);
+        const res = html('table#sailorTable').children('tbody:first-of-type').children('tr').map(mapRows).get().filter(el => Object.keys(el).length !== 0 && el.dia_diem);
+        await set('ncovcity', res);
+        log.info(`NCOVcity Scraper success! ${res.length} cities`);
+    }
+    catch (err) {
+        log.err('NCOV-ALL failed!', err);
         return null;
-    };
+    }
 };
 
 module.exports = processCityVN;
