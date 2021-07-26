@@ -13,8 +13,10 @@ module.exports = {
         if (!key || !value) throw new Error('Key or value is null!');
         return await db.set(key, value);
     },
-    getAll: async function(Key) {
-        if (!key) throw new Error('Key is null!');
+    getAll: async function() {
         return await db.all();
+    },
+    reset: async function() {
+        return await db.deleteAll();
     },
 };

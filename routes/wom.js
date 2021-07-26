@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { get } = require('../handlers/database');
 const { wordsStandardize, getCountryData } = require('../utils/utils');
+const { getWorldometersData } = require('../utils/utils');
 
 // get all data
 router.get('/', async (req, res) => {
@@ -66,7 +67,11 @@ function fixApostrophe(country) {
 function getWOHData(data, nameParam) {
     const countryInfo = isNaN(nameParam) ? getCountryData(nameParam) : {};
     const standardizedName = wordsStandardize(countryInfo.country ? countryInfo.country : nameParam);
-    return data.find((country) => !isNaN(nameParam) ? country.countryInfo && country.countryInfo._id === Number(nameParam) : search(country, nameParam, standardizedName));
+    return data.find((country) => {
+        if (!isNaN(nameParam)) return country.countryInfo && country.countryInfo._id === Number(nameParam);
+        if (country.continent && country.continent.includes('-')) return search(country, nameParam, standardizedName);
+        else return wordsStandardize(country.country) === standardizedName;
+    });
 }
 
 function search(country, nameParam, standardizedName) {
