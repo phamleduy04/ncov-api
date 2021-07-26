@@ -40,6 +40,10 @@
     {
       "name": "Thành Phố VN",
       "description": "Dữ liệu COVID-19 theo thành phố ở Việt Nam, được cập nhật 10 phút một lần!"
+    },
+    {
+      "name": "An Toàn COVID",
+      "description": "Thống kê mức độ an toàn các thành phố ở Việt Nam lấy từ antoancovid.vn, được cập nhật 10 phút một lần!"
     }
   ],
   "paths": {
@@ -301,6 +305,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/cityvnArr"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/antoan": {
+      "get": {
+        "tags": [
+          "An Toàn COVID"
+        ],
+        "summary": "Tất cả dữ liệu mức độ an toàn xếp theo thành phố",
+        "responses": {
+          "200": {
+            "description": "Đã lấy dữ liệu thành công",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/antoanCovidArr"
                 }
               }
             }
@@ -650,6 +674,40 @@
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/cityvn"
+        }
+      },
+      "antoanCovid": {
+        "properties": {
+          "updatedAt": {
+            "type": "number"
+          },
+          "dia_diem": {
+            "type": "string"
+          },
+          "an_toan": {
+            "type": "number"
+          },
+          "co_rui_ro": {
+            "type": "number"
+          },
+          "khong_an_toan": {
+            "type": "number"
+          },
+          "chua_danh_gia": {
+            "type": "number"
+          },
+          "ty_le_an_toan": {
+            "type": "string"
+          },
+          "muc_do_an_toan": {
+            "type": "string"
+          }
+        }
+      },
+      "antoanCovidArr": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/antoanCovid"
         }
       }
     }

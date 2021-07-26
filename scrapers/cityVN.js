@@ -1,6 +1,6 @@
 /**
  * Database ID: ncovcity
- * Interval: 2h
+ * Interval: 10m
  */
 
 const axios = require('axios');
@@ -25,7 +25,7 @@ const mapRows = (_, row) => {
 	return city;
 };
 
-const processCityVN = async (ncovArr) => {
+const processCityVN = async () => {
     try {
         const url = `https://ncov.moh.gov.vn/`;
         const html = cheerio.load((await axios.default({ method: 'GET', url, httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false }) })).data);

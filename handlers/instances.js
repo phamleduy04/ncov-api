@@ -4,6 +4,7 @@ const getWorldOMeter = require('../scrapers/wordometers');
 const getcityVietnam = require('../scrapers/cityVN');
 const getHistorical = require('../scrapers/historical');
 const getStates = require('../scrapers/states');
+const getAntoancovid = require('../scrapers/antoan');
 const log = require('../utils/log');
 
 module.exports = {
@@ -18,6 +19,7 @@ module.exports = {
             getHistorical(),
             getcityVietnam(),
             getStates(),
+            getAntoancovid(),
         ]);
         log.info('Finished small scrapping!');
     },

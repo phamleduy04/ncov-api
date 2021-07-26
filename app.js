@@ -27,6 +27,7 @@ app.use('/wom', require('./routes/wom'));
 app.use('/ncov', require('./routes/ncov'));
 app.use('/historical', require('./routes/historical'));
 app.use('/cityvn', require('./routes/cityVN'));
+app.use('/antoan', require('./routes/antoan'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
