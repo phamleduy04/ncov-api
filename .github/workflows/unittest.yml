@@ -1,0 +1,29 @@
+name: unittest
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+  pull_request:
+    branches:
+      - '*'
+  schedule:
+    - cron: "0 */2 * * *"
+jobs:
+  unittests:
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo
+        ports:
+          - 27017:27017
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      - uses: zcong1993/setup-timezone@master
+        with:
+          timezone: America/Chicago
+      - run: npm run docker-test
+        env:
+          MONGODB: mongodb://localhost:27017/ncovapi
