@@ -3,8 +3,11 @@ on:
   push:
     branches: [main]
     paths-ignore:
-      - 'README.md'
+      - '.github/**'
+      - '*.md'
+      - 'assets/**'
       - 'LICENSE'
+      - 'node_modules/*'
   pull_request:
     branches:
       - '*'
@@ -24,6 +27,7 @@ jobs:
       - uses: zcong1993/setup-timezone@master
         with:
           timezone: America/Chicago
-      - run: npm run docker-test
+      - run: yarn install --frozen-lockfile
+      - run: yarn run test
         env:
           MONGODB: mongodb://localhost:27017/ncovapi
