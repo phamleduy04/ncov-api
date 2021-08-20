@@ -7,7 +7,7 @@ const swaggerJSON = require('./frontend/apidocs/sawgger_v1.json');
 
 // view engine setup
 app.set('views', require('path').join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(require('cors')({ allowedHeaders: '*' }));
 app.use(logger('dev'));
 app.use(express.json());
