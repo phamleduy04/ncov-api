@@ -31,7 +31,7 @@
     },
     {
       "name": "ncov",
-      "description": "Dữ liệu bệnh nhân lấy từ trang chủ của Bộ Y Tế Việt Nam, được cập nhật 2 tiếng một lần"
+      "description": "Dữ liệu lấy từ trang chủ của Bộ Y Tế Việt Nam, được cập nhật 2 tiếng một lần"
     },
     {
       "name": "Lịch Sử",
@@ -305,6 +305,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/cityvnArr"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lastsevenday": {
+      "get": {
+        "tags": [
+          "ncov"
+        ],
+        "summary": "Dữ liệu COVID-19 của Việt Nam 7 ngày gần nhất",
+        "responses": {
+          "200": {
+            "description": "Đã lấy dữ liệu thành công",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/lastSevenDayArr"
                 }
               }
             }
@@ -708,6 +728,40 @@
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/antoanCovid"
+        }
+      },
+      "lastSevenDay": {
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "death": {
+            "type": "number"
+          },
+          "treating": {
+            "type": "number"
+          },
+          "cases": {
+            "type": "number"
+          },
+          "recovered": {
+            "type": "number"
+          },
+          "avgCases7day": {
+            "type": "number"
+          },
+          "avgRecovered7day": {
+            "type": "number"
+          },
+          "avgDeath7day": {
+            "type": "number"
+          }
+        }
+      },
+      "lastSevenDayArr": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/lastSevenDay"
         }
       }
     }
