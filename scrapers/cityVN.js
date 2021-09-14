@@ -13,13 +13,13 @@ const processCityVN = async () => {
         const url = `https://static.pipezero.com/covid/data.json`;
         const html = (await axios.default({ method: 'GET', url, httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false }) })).data;
         const res = html.locations.map(el => {
-            return { 
+            return {
                 updatedAt: Date.now(),
                 dia_diem: el.name,
                 tu_vong: el.death,
                 hom_nay: el.casesToday,
                 tong_ca_nhiem: el.cases,
-            }
+            };
         });
         await set('ncovcity', res);
         log.info(`NCOVcity Scraper success! ${res.length} cities`);
