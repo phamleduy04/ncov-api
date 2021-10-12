@@ -1,8 +1,13 @@
 require('dotenv').config();
-const { Database } = require('quickmongo');
-const db = new Database(process.env.MONGODB || 'mongodb://localhost/ncov-api');
+const { Collection: MongoCollection, MongoClient } = require("mongodb");
+const { Fields } = require("quickmongo");
 
-db.on('ready', () => console.log('Database is ready!'));
+const mongo = new MongoClient(process.env.MONGODB || 'mongodb://localhost/ncov-api');
+const schema = new Fields.AnyField;
+
+mongo.connect().then(() => console.log('Database is ready!'));
+
+const db = new Collection(MongoCollection, schema);
 
 module.exports = {
     get: async function(key) {
@@ -17,6 +22,6 @@ module.exports = {
         return await db.all();
     },
     reset: async function() {
-        return await db.deleteAll();
+        return await db.drop();
     },
 };
