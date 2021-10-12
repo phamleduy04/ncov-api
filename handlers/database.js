@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Collection: MongoCollection, MongoClient } = require("mongodb");
-const { Fields } = require("quickmongo");
+const { Collection, Fields } = require("quickmongo");
 
 const mongo = new MongoClient(process.env.MONGODB || 'mongodb://localhost/ncov-api');
 const schema = new Fields.AnyField;
