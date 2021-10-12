@@ -1,7 +1,8 @@
 name: unittest
 on:
   push:
-    branches: [main]
+    branches:
+      - '*'
     paths-ignore:
       - '.github/**'
       - '*.md'
