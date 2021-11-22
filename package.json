@@ -17,7 +17,7 @@
     "csvtojson": "^2.0.10",
     "dotenv": "10.0.0",
     "express": "4.17.1",
-    "http-errors": "1.8.0",
+    "http-errors": "1.8.1",
     "https": "^1.0.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.34",
