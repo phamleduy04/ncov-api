@@ -6,7 +6,7 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('TESTING /antoan', () => {
+describe.skip('TESTING /antoan', () => {
     it('/antoan correct type', (done) => {
         chai.request(app)
             .get('/antoan')
