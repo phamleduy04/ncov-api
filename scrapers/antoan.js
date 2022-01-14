@@ -31,6 +31,7 @@ const mapRows = (_, row) => {
 };
 
 const processAnToanVN = async () => {
+    return;
     const { data } = await axios.get('https://antoancovid.vn/dashboard_2');
     const $ = cheerio.load(data);
     const res = $('table#exampleAntoancovidAll').children('tbody:first-of-type').children('tr').map(mapRows).get();
