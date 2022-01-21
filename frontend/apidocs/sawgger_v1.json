@@ -338,6 +338,7 @@
           "An Toàn COVID"
         ],
         "summary": "Tất cả dữ liệu mức độ an toàn xếp theo thành phố",
+        "deprecated": true,
         "responses": {
           "200": {
             "description": "Đã lấy dữ liệu thành công",
