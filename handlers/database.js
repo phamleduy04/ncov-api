@@ -1,8 +1,8 @@
 require('dotenv').config();
 const { Database } = require("quickmongo");
 const db = new Database(process.env.MONGODB || 'mongodb://localhost/ncov-api');
-db.connect().then(() => console.log('Database is ready!'));
 
+db.on('ready', () => console.log('Database is ready!'));
 module.exports = {
     get: async function(key) {
         if (!key) throw new Error('Key is null!');
