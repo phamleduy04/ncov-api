@@ -29,7 +29,7 @@
     "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
-    "chai": "^4.3.4",
+    "chai": "^4.3.5",
     "chai-http": "^4.3.0",
     "eslint": "8.6.0",
     "mocha": "9.1.3",
