@@ -1,13 +1,7 @@
 require('dotenv').config();
-const { MongoClient } = require("mongodb");
-const { Collection, Fields } = require("quickmongo");
-
-const mongo = new MongoClient(process.env.MONGODB || 'mongodb://localhost/ncov-api');
-const schema = new Fields.AnyField;
-
-mongo.connect().then(() => console.log('Database is ready!'));
-const mongoCollection = mongo.db().collection("ncov");
-const db = new Collection(mongoCollection, schema);
+const { Database } = require("quickmongo");
+const db = new Database(process.env.MONGODB || 'mongodb://localhost/ncov-api');
+db.connect().then(() => console.log('Database is ready!'));
 
 module.exports = {
     get: async function(key) {
