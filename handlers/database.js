@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { Database } = require("quickmongo");
 const db = new Database(process.env.MONGODB || 'mongodb://localhost/ncov-api');
+db.connect();
 db.on('ready', () => console.log('Database is ready!'));
 db.on('error', (err) => console.error(err));
 module.exports = {
