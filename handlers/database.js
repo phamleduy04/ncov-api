@@ -1,9 +1,11 @@
+const { MongoClient } = require("mongodb");
+const { Collection } = require('./mongo');
 require('dotenv').config();
-const { Database } = require("quickmongo");
-const db = new Database(process.env.MONGODB || 'mongodb://localhost/ncov-api');
-db.connect();
-db.on('ready', () => console.log('Database is ready!'));
-db.on('error', (err) => console.error(err));
+const mongo = new MongoClient(process.env.MONGODB || "mongodb://localhost/economy");
+mongo.connect().then(() => console.log("Connected to Mongodb database"));
+const mongoCollection = mongo.db().collection("ncov");
+const db = new Collection(mongoCollection, mongo.startSession());
+
 module.exports = {
     get: async function(key) {
         if (!key) throw new Error('Key is null!');
