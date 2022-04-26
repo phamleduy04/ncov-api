@@ -10,7 +10,7 @@
     "test": "mocha ./tests --exit --recursive --timeout 200000"
   },
   "dependencies": {
-    "axios": "0.26.1",
+    "axios": "0.27.1",
     "chalk": "4.1.2",
     "cheerio": "1.0.0-rc.10",
     "cors": "^2.8.5",
@@ -19,7 +19,7 @@
     "express": "4.18.0",
     "http-errors": "2.0.0",
     "https": "^1.0.0",
-    "moment": "^2.29.2",
+    "moment": "^2.29.3",
     "moment-timezone": "^0.5.34",
     "mongodb": "^4.5.0",
     "morgan": "1.10.0",
@@ -30,7 +30,7 @@
   "devDependencies": {
     "chai": "4.3.6",
     "chai-http": "^4.3.0",
-    "eslint": "8.12.0",
+    "eslint": "8.14.0",
     "mocha": "9.2.2",
     "nodemon": "2.0.15"
   }
