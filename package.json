@@ -1,10 +1,10 @@
 {
   "name": "ncov-api",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "0.2.0",
+  "description": "API for the COVID-19 data",
+  "author": "phamleduy04",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "GNUv3",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
