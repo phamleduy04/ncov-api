@@ -1,7 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { get } from '../../../database/database';
 import { getCountryData, wordsStandardize } from '../../../utils/utils';
-import type { WOMWorldData } from '../../../scrapers/wom.world';
+import type { WOMWorldData, WOMCountryData } from '../../../scrapers/wom.world';
 import type { WOMUsState } from '../../../scrapers/wom.usstate';
 
 @Injectable()
@@ -10,21 +10,22 @@ export class womService {
         return 'Hello World!';
     }
 
-    async getWorldData(yesterday = false): Promise<Object> {
+    async getWorldData(yesterday = false): Promise<WOMWorldData> {
         const countries = await get(yesterday ? 'womYesterday' : 'womToday');
         const worldData = countries.find(elem => elem.country.toLowerCase() === 'world');
         worldData.affectedCountries = countries.length - 1;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { country, countryInfo, ...cleanedWorldData } = worldData;
         return cleanedWorldData;
     }
 
-    async getAllCountries(yesterday = false): Promise<WOMWorldData[]> {
-        const data:WOMWorldData[] = (await get(yesterday ? 'womYesterday' : 'womToday')).filter(elem => elem.country.toLowerCase() !== 'world').map(fixApostrophe).map(el => el);
+    async getAllCountries(yesterday = false): Promise<WOMCountryData[]> {
+        const data:WOMCountryData[] = (await get(yesterday ? 'womYesterday' : 'womToday')).filter(elem => elem.country.toLowerCase() !== 'world').map(fixApostrophe).map(el => el);
         return data;
     };
 
-    async getCountryName(yesterday = false, query:string): Promise<WOMWorldData> {
-        const data:WOMWorldData[] = (await get(yesterday ? 'womYesterday' : 'womToday')).filter(elem => elem.country.toLowerCase() !== 'world').map(fixApostrophe).map(el => el);
+    async getCountryName(yesterday = false, query:string): Promise<WOMCountryData> {
+        const data:WOMCountryData[] = (await get(yesterday ? 'womYesterday' : 'womToday')).filter(elem => elem.country.toLowerCase() !== 'world').map(fixApostrophe).map(el => el);
         const countryData = getCountryWOHData(data, query) || null;
         return countryData;
     }

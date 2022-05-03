@@ -9,7 +9,7 @@ const parseNumberCell = (cell) => {
     return parseFloat(cellValue.replace(/[,+\-\s]/g, '')) || null;
 };
 
-const fillResult = (html:cheerio.Root, yesterday:Boolean = false):WOMUsState[] => {
+const fillResult = (html:cheerio.Root, yesterday = false):WOMUsState[] => {
     const statesTable = html(yesterday ? 'table#usa_table_countries_yesterday' : 'table#usa_table_countries_today');
     const tableRows = statesTable.children('tbody').children('tr:not(.total_row)').get();
     const stateColIndex = 1;
@@ -32,13 +32,13 @@ const fillResult = (html:cheerio.Root, yesterday:Boolean = false):WOMUsState[] =
         Object.keys(dataColIndexes).forEach((property) => stateData[property] = parseNumberCell(cells[dataColIndexes[property]]));
         return stateData;
     });
-}
+};
 
 const getStates = async ():Promise<void> => {
     try {
         const response = await request('https://www.worldometers.info/coronavirus/country/us/').then(res => res.body.text());
         const html = cheerio.load(response);
-        const statesData:WOMUsState[]= fillResult(html).filter(el => el.state !== 'USA Total');
+        const statesData:WOMUsState[] = fillResult(html).filter(el => el.state !== 'USA Total');
         await set('USToday', statesData);
         log.info(`Updated US states: ${statesData.length} states`);
 
@@ -50,7 +50,7 @@ const getStates = async ():Promise<void> => {
         log.error('Error getting US states', err);
         return;
     }
-}
+};
 
 export interface WOMUsState {
     state: string,

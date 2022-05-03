@@ -3,14 +3,14 @@ import { request } from 'undici';
 import { info, error } from '../utils/log';
 import { set } from '../database/database';
 import { getCountryData } from '../utils/utils';
-const columns: String[] = ['index', 'country', 'cases', 'todayCases', 'deaths', 'todayDeaths', 'recovered', 'todayRecovered', 'active', 'critical'];
+const columns: string[] = ['index', 'country', 'cases', 'todayCases', 'deaths', 'todayDeaths', 'recovered', 'todayRecovered', 'active', 'critical'];
 
 // Returns country data list ordered by country name
 const getOrderByCountryName = (data) => data.sort((a, b) => a.country < b.country ? -1 : 1);
 
 // Maps a row from worldometers to a country
-const mapRows = (_, row):Object=> {
-	const entry = { updated: Date.now(), countryInfo: {}, active: 0, cases: 0, recovered: 0, deaths: 0, critical: 0, todayCases: 0, todayDeaths: 0, todayRecovered: 0 };
+const mapRows = (_, row):WOMCountryData=> {
+	const entry = { updated: Date.now(), countryInfo: { _id: null, iso2: null, iso3: null, lat: 0, long: 0 }, active: 0, cases: 0, recovered: 0, deaths: 0, critical: 0, todayCases: 0, todayDeaths: 0, todayRecovered: 0, country: '' };
 	const replaceRegex = /(\n|,)/g;
 	cheerio.load(row)('td').each((index, cell: any) => {
 		const selector: any = columns[index];
@@ -59,7 +59,7 @@ const getWorldometerPage = async () => {
 
 export default getWorldometerPage;
 
-export interface WOMWorldData {
+export interface WOMCountryData {
 	"updated": number,
     "countryInfo": {
         "_id": number,
@@ -77,4 +77,17 @@ export interface WOMWorldData {
     "todayDeaths": number | null,
     "todayRecovered": number | null,
     "critical": number | null
+}
+
+export interface WOMWorldData{
+    "updated": number,
+    "active": number,
+    "cases": number,
+    "recovered": number,
+    "deaths": number,
+    "critical": number,
+    "todayCases": number,
+    "todayDeaths": number,
+    "todayRecovered": number,
+    "affectedCountries": number
 }
