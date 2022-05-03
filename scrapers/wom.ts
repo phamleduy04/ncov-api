@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
 import { request } from 'undici';
-import { info, err } from '../utils/log';
+import { info, error } from '../utils/log';
 import { set } from '../database/database';
 import { getCountryData } from '../utils/utils';
 const columns: String[] = ['index', 'country', 'cases', 'todayCases', 'deaths', 'todayDeaths', 'recovered', 'todayRecovered', 'active', 'critical'];
@@ -12,7 +12,7 @@ const getOrderByCountryName = (data) => data.sort((a, b) => a.country < b.countr
 const mapRows = (_, row) => {
 	const entry = { updated: Date.now(), countryInfo: null, active: 0, cases: 0, recovered: 0, deaths: 0 };
 	const replaceRegex = /(\n|,)/g;
-	cheerio(row).children('td').each((index, cell: any) => {
+	cheerio.load(row)('td').each((index, cell: any) => {
 		const selector: any = columns[index];
 		if (!selector) return;
 		cell = cheerio.load(cell);
@@ -44,17 +44,16 @@ function fillResult(html, idExtension) {
 
 // Scrap and update to mongodb
 const getWorldometerPage = async () => {
-	console.log('hi');
 	try {
-		const res = await request('https://www.worldometers.info/coronavirus').then(res => res.body.text());
-		const html = cheerio.load(res);
+		const res = await request('https://www.worldometers.info/coronavirus/');
+		const html = cheerio.load(await res.body.text());
 		['today', 'yesterday'].forEach(key => {
 			const data = fillResult(html, key);
 			set(key === 'today' ? 'womToday' : 'womYesterday', [data.world, ...getOrderByCountryName(data.countries)]);
 			info(`Updated ${key} countries statistics: ${data.countries.length + 1}`);
 		});
 	} catch (err) {
-		err('Error: Requesting WorldoMeters failed!', err);
+		error('Error: Requesting WorldoMeters failed!', err);
 	}
 };
 

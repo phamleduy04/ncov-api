@@ -1,4 +1,4 @@
-import countryData from '../assets/countries.json';
+import * as countryData from '../assets/countries.json';
 
 const wordsStandardize = (word:string):string => word ? word.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '';
 

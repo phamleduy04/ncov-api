@@ -5,7 +5,7 @@ const timeNow = () => moment().tz(process.env.TZ || 'America/Chicago').format('M
 
 const msg = (func: Function, message: string) => func(chalk.yellow(`[${timeNow()}]`) + ' ' + chalk.green(message));
 
-const err = (message:string = 'Unknown error', err:Error) => {
+const error = (message:string = 'Unknown error', err:Error) => {
     console.error(chalk.yellow(timeNow()) + ' Error: ' + chalk.red(message));
     console.error(err);
 }
@@ -17,7 +17,7 @@ const info = (message:string) => {
 const warn = (message:string) => msg(console.warn, `${chalk.yellow('WARNING ->')} -> ${message}`);
 
 export {
-    err,
+    error,
     info,
     warn,
 }
