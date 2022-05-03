@@ -6,7 +6,6 @@ module.exports = {
 		"node": true,
 		"jest": true,
 		"es2020": true,
-		"node": true,
 	},
 	extends: [
 		'plugin:@typescript-eslint/recommended',
