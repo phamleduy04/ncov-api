@@ -19,7 +19,7 @@ export class Collection {
         } catch {
             return false;
         }
-    }
+    };
 
     /**
      * Get data from the collection
