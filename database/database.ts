@@ -31,7 +31,7 @@ const reset = async () => {
 
 const close = async () => {
     return await mongo.close();
-}
+};
 
 export {
     get,
@@ -39,4 +39,4 @@ export {
     getAll,
     reset,
     close,
-}
+};

@@ -50,7 +50,7 @@ export class Collection {
      * @param {string} key The key
      * @returns {Promise<Boolean>}
      */
-    async delete(key:string):Promise<Boolean> {
+    async delete(key:string):Promise<boolean> {
         if (!key) throw new Error("Key is required");
         const data = await this.collection.deleteOne({ ID: key });
         if (data.deletedCount > 0) return true;
@@ -62,7 +62,7 @@ export class Collection {
      * Drop the collection
      * @returns {Promise<Boolean>}
      */
-    async drop():Promise<Boolean> {
+    async drop():Promise<boolean> {
         try {
             return await this.collection.drop();
         } catch {
