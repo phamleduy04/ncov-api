@@ -28,7 +28,7 @@ jobs:
       - uses: zcong1993/setup-timezone@master
         with:
           timezone: America/Chicago
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --frozen-lockfile --production=true
       - run: yarn run test
         env:
           MONGODB: mongodb://localhost:27017/ncovapi
