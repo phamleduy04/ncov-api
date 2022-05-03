@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { womController } from './routes/wom/wom.controller';
 import { womService } from './routes/wom/wom.service';
+import * as db from '../database/database';
 
 describe('AppController', () => {
     let appController: womController;
@@ -13,6 +14,8 @@ describe('AppController', () => {
 
         appController = app.get<womController>(womController);
     });
+
+    afterAll(() => db.close());
 
     describe('root', () => {
         it('/wom correct type', async () => {
@@ -87,7 +90,7 @@ describe('AppController', () => {
             });
         });
 
-        it('/wom/countries/ correct type', async () => {
+        it('/wom/countries/ search correct type', async () => {
             const result = await appController.getCountryData({ yesterday: 'false' }, { country: 'Vietnam' });
             expect(result).toBeDefined();
             expect(result).toHaveProperty('updated');
@@ -105,7 +108,7 @@ describe('AppController', () => {
             expect(result).toHaveProperty('country');
         });
 
-        it('/wom/countries/ yesterday correct type', async () => {
+        it('/wom/countries/ yesterday search correct type', async () => {
             const result = await appController.getCountryData({ yesterday: 'true' }, { country: 'Vietnam' });
             expect(result).toBeDefined();
             expect(result).toHaveProperty('updated');
@@ -124,13 +127,13 @@ describe('AppController', () => {
         });
     });
 
-        it('/wom/countries/ correct alternative name', async () => {
+        it('/wom/countries/ search correct alternative name', async () => {
             const result = await appController.getCountryData({ yesterday: 'false' }, { country: 'viet nam' });
             expect(result).toBeDefined();
             expect(result.country).toBe('Vietnam');
         });
 
-        it('/wom/countries/ yesterday correct alternative name', async () => {
+        it('/wom/countries/ yesterday search correct alternative name', async () => {
             const result = await appController.getCountryData({ yesterday: 'true' }, { country: 'viet nam' });
             expect(result).toBeDefined();
             expect(result.country).toBe('Vietnam');
@@ -170,5 +173,46 @@ describe('AppController', () => {
             expect(result).toBeNull();
         });
 
+        it('/wom/state correct type', async () => {
+            const result = await appController.getAllStatesData({ yesterday: 'false' });
+            expect(result).toBeDefined();
+            expect(result).toBeInstanceOf(Array);
+            result.forEach(element => {
+                expect(element).toHaveProperty('state');
+                expect(element).toHaveProperty('updated');
+                expect(element).toHaveProperty('cases');
+                expect(element).toHaveProperty('todayCases');
+                expect(element).toHaveProperty('deaths');
+                expect(element).toHaveProperty('todayDeaths');
+                expect(element).toHaveProperty('recovered');
+                expect(element).toHaveProperty('active');
+                expect(element).toHaveProperty('casesPerOneMillion');
+                expect(element).toHaveProperty('deathsPerOneMillion');
+                expect(element).toHaveProperty('tests');
+                expect(element).toHaveProperty('testsPerOneMillion');
+                expect(element).toHaveProperty('population');
+            });
+        });
+
+        it('/wom/state yesterday correct type', async () => {
+            const result = await appController.getAllStatesData({ yesterday: 'true' });
+            expect(result).toBeDefined();
+            expect(result).toBeInstanceOf(Array);
+            result.forEach(element => {
+                expect(element).toHaveProperty('state');
+                expect(element).toHaveProperty('updated');
+                expect(element).toHaveProperty('cases');
+                expect(element).toHaveProperty('todayCases');
+                expect(element).toHaveProperty('deaths');
+                expect(element).toHaveProperty('todayDeaths');
+                expect(element).toHaveProperty('recovered');
+                expect(element).toHaveProperty('active');
+                expect(element).toHaveProperty('casesPerOneMillion');
+                expect(element).toHaveProperty('deathsPerOneMillion');
+                expect(element).toHaveProperty('tests');
+                expect(element).toHaveProperty('testsPerOneMillion');
+                expect(element).toHaveProperty('population');
+            });
+        });
 
 });
