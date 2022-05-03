@@ -1,8 +1,10 @@
-import getWOM from './wom';
+import getWOM from './wom.world';
+import getStates from './wom.usstate';
 
 const execute = async (): Promise<void> => {
     await Promise.all([
-        getWOM()
+        getWOM(),
+        getStates(),
     ]);
 };
 export default execute;

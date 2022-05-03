@@ -9,8 +9,8 @@ const columns: String[] = ['index', 'country', 'cases', 'todayCases', 'deaths', 
 const getOrderByCountryName = (data) => data.sort((a, b) => a.country < b.country ? -1 : 1);
 
 // Maps a row from worldometers to a country
-const mapRows = (_, row) => {
-	const entry = { updated: Date.now(), countryInfo: null, active: 0, cases: 0, recovered: 0, deaths: 0 };
+const mapRows = (_, row):Object=> {
+	const entry = { updated: Date.now(), countryInfo: {}, active: 0, cases: 0, recovered: 0, deaths: 0, critical: 0, todayCases: 0, todayDeaths: 0, todayRecovered: 0 };
 	const replaceRegex = /(\n|,)/g;
 	cheerio.load(row)('td').each((index, cell: any) => {
 		const selector: any = columns[index];
@@ -58,3 +58,23 @@ const getWorldometerPage = async () => {
 };
 
 export default getWorldometerPage;
+
+export interface WOMWorldData {
+	"updated": number,
+    "countryInfo": {
+        "_id": number,
+        "iso2": string,
+        "iso3": string,
+        "lat": number,
+        "long": number
+    },
+    "active": number | null,
+    "cases": number,
+    "recovered": number,
+    "deaths": number,
+    "country": string,
+    "todayCases": number | null,
+    "todayDeaths": number | null,
+    "todayRecovered": number | null,
+    "critical": number | null
+}

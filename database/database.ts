@@ -29,9 +29,14 @@ const reset = async () => {
     return await db.drop();
 };
 
+const close = async () => {
+    return await mongo.close();
+}
+
 export {
     get,
     set,
     getAll,
     reset,
+    close,
 }
