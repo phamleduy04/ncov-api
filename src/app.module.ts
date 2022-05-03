@@ -12,4 +12,5 @@ import { womService } from './routes/wom/wom.service';
   providers: [AppService, womService],
 })
 
+// eslint-disable-next-line no-empty-function
 export class AppModule {}

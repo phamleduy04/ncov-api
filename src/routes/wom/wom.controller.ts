@@ -5,6 +5,7 @@ import type { WOMUsState } from '../../../scrapers/wom.usstate';
 
 @Controller('wom')
 export class womController {
+    // eslint-disable-next-line no-empty-function
     constructor(private readonly appService: womService) { }
 
     @Get()

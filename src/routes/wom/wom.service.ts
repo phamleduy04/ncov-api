@@ -10,7 +10,7 @@ export class womService {
         return 'Hello World!';
     }
 
-    async getWorldData(yesterday:Boolean = false): Promise<Object> {
+    async getWorldData(yesterday = false): Promise<Object> {
         const countries = await get(yesterday ? 'womYesterday' : 'womToday');
         const worldData = countries.find(elem => elem.country.toLowerCase() === 'world');
         worldData.affectedCountries = countries.length - 1;
@@ -18,23 +18,23 @@ export class womService {
         return cleanedWorldData;
     }
 
-    async getAllCountries(yesterday:Boolean = false): Promise<WOMWorldData[]> {
+    async getAllCountries(yesterday = false): Promise<WOMWorldData[]> {
         const data:WOMWorldData[] = (await get(yesterday ? 'womYesterday' : 'womToday')).filter(elem => elem.country.toLowerCase() !== 'world').map(fixApostrophe).map(el => el);
         return data;
     };
 
-    async getCountryName(yesterday:Boolean = false, query:string): Promise<WOMWorldData> {
+    async getCountryName(yesterday = false, query:string): Promise<WOMWorldData> {
         const data:WOMWorldData[] = (await get(yesterday ? 'womYesterday' : 'womToday')).filter(elem => elem.country.toLowerCase() !== 'world').map(fixApostrophe).map(el => el);
         const countryData = getCountryWOHData(data, query) || null;
         return countryData;
     }
 
-    async getAllUSSates(yesterday:Boolean = false): Promise<WOMUsState[]> {
+    async getAllUSSates(yesterday = false): Promise<WOMUsState[]> {
         const data:WOMUsState[] = (await get(yesterday ? 'USYesterday' : 'USToday'));
         return data;
     };
 
-    async getUSState(yesterday:Boolean = false, query:string): Promise<WOMUsState> {
+    async getUSState(yesterday = false, query:string): Promise<WOMUsState> {
         const data:WOMUsState[] = (await get(yesterday ? 'USYesterday' : 'USToday'));
         const stateData = data.find(el => el.state.toLowerCase() === query.toLowerCase());
         if (!stateData) throw new BadRequestException('Not found');

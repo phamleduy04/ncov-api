@@ -170,5 +170,5 @@ describe('AppController', () => {
             expect(result).toBeNull();
         });
 
-        
+
 });
