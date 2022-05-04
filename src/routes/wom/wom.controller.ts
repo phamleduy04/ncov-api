@@ -37,6 +37,4 @@ export class womController {
         const yesterday = (query.yesterday == 'true');
         return this.appService.getUSState(yesterday, param.state);
     }
-
-
 }
