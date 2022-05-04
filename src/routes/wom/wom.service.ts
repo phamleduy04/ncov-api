@@ -6,9 +6,6 @@ import type { WOMUsState } from '../../../scrapers/wom.usstate';
 
 @Injectable()
 export class womService {
-    getHello(): string {
-        return 'Hello World!';
-    }
 
     async getWorldData(yesterday = false): Promise<WOMWorldData> {
         const countries = await get(yesterday ? 'womYesterday' : 'womToday');
