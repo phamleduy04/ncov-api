@@ -12,7 +12,7 @@
   "dependencies": {
     "axios": "0.27.2",
     "chalk": "4.1.2",
-    "cheerio": "1.0.0-rc.10",
+    "cheerio": "1.0.0-rc.11",
     "cors": "^2.8.5",
     "csvtojson": "^2.0.10",
     "dotenv": "16.0.0",
