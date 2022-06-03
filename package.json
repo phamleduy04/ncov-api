@@ -1,37 +1,79 @@
 {
   "name": "ncov-api",
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "description": "API for the COVID-19 data",
+  "author": "phamleduy04",
   "private": true,
+  "license": "GNUv3",
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www",
-    "scraper": "node serverScrapers.js",
-    "lint": "eslint .",
-    "test": "mocha ./tests --exit --recursive --timeout 200000"
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test,database,utils}/**/*.ts\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "axios": "0.27.2",
+    "@nestjs/common": "^8.4.6",
+    "@nestjs/core": "^8.4.6",
+    "@nestjs/platform-express": "^8.4.6",
     "chalk": "4.1.2",
-    "cheerio": "1.0.0-rc.10",
-    "cors": "^2.8.5",
-    "csvtojson": "^2.0.10",
-    "dotenv": "16.0.0",
-    "express": "4.18.1",
-    "http-errors": "2.0.0",
-    "https": "^1.0.0",
+    "cheerio": "^1.0.0-rc.11",
+    "dotenv": "^16.0.1",
     "moment": "^2.29.3",
     "moment-timezone": "^0.5.34",
-    "mongodb": "^4.5.0",
-    "morgan": "1.10.0",
-    "ms": "^2.1.3",
-    "pug": "^3.0.2",
-    "swagger-ui-express": "^4.3.0"
+    "mongodb": "^4.6.0",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^7.5.5",
+    "undici": "^5.4.0"
   },
   "devDependencies": {
-    "chai": "4.3.6",
-    "chai-http": "^4.3.0",
-    "eslint": "8.14.0",
-    "mocha": "10.0.0",
-    "nodemon": "2.0.16"
+    "@nestjs/cli": "^8.2.6",
+    "@nestjs/schematics": "^8.0.11",
+    "@nestjs/testing": "^8.4.6",
+    "@types/cheerio": "^0.22.31",
+    "@types/express": "^4.17.13",
+    "@types/jest": "28.1.0",
+    "@types/node": "^17.0.38",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^28.1.0",
+    "prettier": "^2.6.2",
+    "source-map-support": "^0.5.21",
+    "supertest": "^6.2.3",
+    "ts-jest": "^28.0.3",
+    "ts-loader": "^9.3.0",
+    "ts-node": "^10.8.0",
+    "tsconfig-paths": "^4.0.0",
+    "typescript": "^4.7.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
   }
 }

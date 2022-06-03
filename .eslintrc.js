@@ -1,15 +1,25 @@
 module.exports = {
 	"ignorePatterns": ["node_modules/*"],
-    "env": {
-        "es2020": true,
-        "commonjs": true,
-        "node": true,
-    },
-    "parserOptions": {
-        "ecmaVersion": 11,
-        "sourceType": "module",
-    },
-    "rules": {
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["@typescript-eslint/eslint-plugin"],
+	"env": {
+		"node": true,
+		"jest": true,
+		"es2020": true,
+	},
+	extends: [
+		'plugin:@typescript-eslint/recommended',
+		'prettier',
+	],
+	"parserOptions": {
+		"project": "tsconfig.json",
+		"sourceType": "module",
+	},
+	"rules": {
+		"@typescript-eslint/interface-name-prefix": "off",
+		"@typescript-eslint/explicit-function-return-type": "off",
+		"@typescript-eslint/explicit-module-boundary-types": "off",
+		"@typescript-eslint/no-explicit-any": "off",
 		"comma-dangle": ["error", "always-multiline"],
 		"comma-spacing": "error",
 		"comma-style": "error",
@@ -41,5 +51,5 @@ module.exports = {
 		"spaced-comment": "error",
 		"yoda": "error",
 		"semi": "error",
-    },
+	},
 };
