@@ -20,7 +20,7 @@ const getCountryData = (country:string):country => {
 export {
     getCountryData,
     wordsStandardize,
-}
+};
 
 export interface country {
     _id: number;
