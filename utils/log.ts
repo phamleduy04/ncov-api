@@ -1,7 +1,11 @@
-import * as moment from 'moment-timezone';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+dayjs.extend(utc)
+dayjs.extend(timezone)
 import * as chalk from 'chalk';
 
-const timeNow = () => moment().tz(process.env.TZ || 'America/Chicago').format('MM/DD/YYYY hh:mm:ss');
+const timeNow = () => dayjs().tz(process.env.TZ || 'America/Chicago').format('MM/DD/YYYY hh:mm:ss');
 
 const msg = (func: any, message: string) => func(chalk.yellow(`[${timeNow()}]`) + ' ' + chalk.green(message));
 
