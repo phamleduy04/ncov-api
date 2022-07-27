@@ -1,8 +1,9 @@
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
-dayjs.extend(utc)
-dayjs.extend(timezone)
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as timezone from 'dayjs/plugin/timezone';
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
 import * as chalk from 'chalk';
 
 const timeNow = () => dayjs().tz(process.env.TZ || 'America/Chicago').format('MM/DD/YYYY hh:mm:ss');
