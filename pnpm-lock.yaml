@@ -16,6 +16,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.31.0
   chalk: 4.1.2
   cheerio: ^1.0.0-rc.12
+  dayjs: ^1.11.4
   dotenv: ^16.0.1
   eslint: ^8.20.0
   eslint-config-prettier: ^8.5.0
@@ -41,6 +42,7 @@ dependencies:
   '@nestjs/platform-express': 9.0.5_yhkp7kxuauoq6imzcegikmb6ju
   chalk: 4.1.2
   cheerio: 1.0.0-rc.12
+  dayjs: 1.11.4
   dotenv: 16.0.1
   mongodb: 4.8.1
   reflect-metadata: 0.1.13
@@ -2055,6 +2057,10 @@ packages:
   /css-what/6.1.0:
     resolution: {integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==}
     engines: {node: '>= 6'}
+    dev: false
+
+  /dayjs/1.11.4:
+    resolution: {integrity: sha512-Zj/lPM5hOvQ1Bf7uAvewDaUcsJoI6JmNqmHhHl3nyumwe0XHwt8sWdOVAPACJzCebL8gQCi+K49w7iKWnGwX9g==}
     dev: false
 
   /debug/2.6.9:
