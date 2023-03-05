@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { womController } from './routes/wom/wom.controller';
 import { womService } from './routes/wom/wom.service';
-import * as db from '../database/database';
 import executeScraper from '../scrapers/instances';
 
 describe('AppController', () => {
@@ -19,7 +18,6 @@ describe('AppController', () => {
         await executeScraper();
     });
 
-    afterAll(() => db.close());
 
     describe('root', () => {
         it('/wom correct type', async () => {
