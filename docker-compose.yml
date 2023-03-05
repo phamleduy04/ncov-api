@@ -1,0 +1,9 @@
+version: '3.6'
+
+services:
+  ncov-api:
+    image: ghcr.io/phamleduy04/ncov-api:latest
+    container_name: ncov-api
+    restart: unless-stopped
+    ports:
+      - 3003:3000
