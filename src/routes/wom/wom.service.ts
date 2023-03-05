@@ -1,5 +1,5 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { get } from '../../../database/database';
+import { get } from '../../../database';
 import { getCountryData, wordsStandardize } from '../../../utils/utils';
 import type { WOMWorldData, WOMCountryData } from '../../../scrapers/wom.world';
 import type { WOMUsState } from '../../../scrapers/wom.usstate';

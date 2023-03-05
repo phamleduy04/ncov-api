@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
 import { request } from 'undici';
 import { info, error } from '../utils/log';
-import { set } from '../database/database';
+import { set } from '../database';
 import { getCountryData } from '../utils/utils';
 const columns: string[] = ['index', 'country', 'cases', 'todayCases', 'deaths', 'todayDeaths', 'recovered', 'todayRecovered', 'active', 'critical'];
 

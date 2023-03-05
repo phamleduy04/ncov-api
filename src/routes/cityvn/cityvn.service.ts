@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { get } from '../../../database/database';
+import { get } from '../../../database';
 
 @Injectable()
 export class cityVNService {

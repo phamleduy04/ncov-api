@@ -1,6 +1,6 @@
 import { request } from 'undici';
 import * as log from '../utils/log';
-import { set } from '../database/database';
+import { set } from '../database';
 
 const processCityVn = async () => {
     // URL chính thức trong network requset từ web https://covid19.gov.vn/

@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio';
 import * as log from '../utils/log';
 
 import { request } from 'undici';
-import { set } from '../database/database';
+import { set } from '../database';
 
 const parseNumberCell = (cell) => {
     const cellValue = cell.children.length !== 0 ? cell.children[0].data : '';
