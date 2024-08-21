@@ -22,7 +22,7 @@
   "dependencies": {
     "@keyv/etcd": "^1.2.0",
     "@keyv/mongo": "^2.2.8",
-    "@keyv/mysql": "^1.6.8",
+    "@keyv/mysql": "^2.0.0",
     "@keyv/postgres": "^1.4.7",
     "@keyv/redis": "^2.7.0",
     "@keyv/sqlite": "^3.6.5",
